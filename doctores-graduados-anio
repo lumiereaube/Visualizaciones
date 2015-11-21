@@ -1,0 +1,613 @@
+PFont tit;
+PFont numbers;
+PFont subs; 
+
+Table doc;
+int fila;
+int col;
+float rad;
+
+float radbio;
+float convbio;
+
+float rading;
+float conving;
+
+float radmed;
+float convmed;
+
+float radagri;
+float convagri;
+
+float radsoc;
+float convsoc;
+
+float radhum;
+float convhum;
+
+float radtot;
+float convtot;
+
+color morado= color (155, 38, 176);
+color moscuro= color (102, 58, 182);
+color cyan= color (1, 187, 212);
+color gray= color(157, 157, 157);
+color teal= color(1, 149, 135);
+color grayos= color(54, 63, 68);
+
+int mas= 40;
+
+void setup () {
+  size (1200,800, P3D);
+  doc= loadTable("esa.csv", "header");
+  println (doc.getRowCount () + "total rows in table");
+  println (doc.getColumnCount () + "total column in table");
+  numbers= loadFont ("BebasNeue-Thin-48.vlw");
+  tit= loadFont ("BebasNeueBold-48.vlw");
+  subs = loadFont ("BebasNeueBook-25.vlw");
+}
+
+
+
+
+
+
+void draw () {
+  background (255,245,232,4); 
+
+
+
+  for (fila=2; fila<6; fila=fila+1) {
+    ellipseMode (CENTER);
+    convbio=(((doc.getFloat(0, fila)*100)/doc.getFloat(0, 6))/100)*360;
+    radbio= radians (convbio);  
+
+    conving=(((doc.getFloat(1, fila)*100)/doc.getFloat(1, 6))/100)*360;
+    rading= radians (conving);  
+
+    convmed=(((doc.getFloat(2, fila)*100)/doc.getFloat(2, 6))/100)*360;
+    radmed= radians (convmed);  
+
+    convagri=(((doc.getFloat(3, fila)*100)/doc.getFloat(3, 6))/100)*360;
+    radagri= radians (conving);  
+
+    convsoc=(((doc.getFloat(4, fila)*100)/doc.getFloat(4, 6))/100)*360;
+    radsoc= radians (convsoc);  
+
+    convhum=(((doc.getFloat(5, fila)*100)/doc.getFloat(5, 6))/100)*360;
+    radhum= radians (convhum);  
+
+    convtot=(((doc.getFloat(fila, 6)*100)/doc.getFloat(6, 6))/100)*360;
+    radtot= radians (convtot);  
+
+   smooth(8);
+
+    
+    //INGENIERÍA Y TECNOLOGÍA
+
+    fill (morado);
+    noStroke();
+
+    ellipse (width/2, 660, 60, 60);
+    fill(gray);
+    textFont (subs, 24);
+    textAlign(CENTER);
+    text(doc.getString(1, 1), 540, 660-30);//título de categoria
+    textFont (numbers, 25);
+    fill(255);
+    text (doc.getString(1, 6), 600, 660+10);//valor total
+
+    noFill();
+    stroke (moscuro);
+    strokeWeight(4);
+    arc( 580, 660-20,150+(fila*40), 150+(fila*40), 0, rading);
+    textAlign(LEFT);
+
+    // Esto es para hacer el mousePresesed 600,660
+    pushMatrix();
+    translate(25,100);
+    noStroke();                
+    if (mouseY>540 && mouseY<660) {  
+      if (mouseX>540 && mouseX<660) {
+        
+           fill (morado,50);
+    noStroke();
+    ellipseMode(CENTER);
+        ellipse ((width/2)-25, 560, 130, 130);
+        
+        textFont (numbers, 14);
+        fill(cyan);
+        ellipse (522, 646, 25, 25);
+        fill(grayos);
+        text(doc.getString(1, 2), 513, 651);
+
+        fill(cyan);
+
+        ellipse (504, 666, 25, 25);
+        fill(grayos);
+        text(doc.getString(1, 3), 495, 671);
+
+        fill(cyan);
+
+        ellipse (452, 650, 25, 25);
+        fill(grayos);
+        text(doc.getString(1, 4), 444, 655);
+
+
+        fill(cyan);
+
+        ellipse (716, 615, 25, 25);
+        fill(grayos);
+        text(doc.getString(1, 5), 710, 620);
+      }
+    }
+popMatrix();
+
+//años
+    textFont (numbers, 14);
+    fill(gray);
+    pushMatrix();
+    translate((width/2),660-30);
+    rotate(-PI/2);
+    text("2010", 0,100);
+    text("2011", 0,120);
+    text("2012", 0,140);
+    text("2013", 0,160);
+
+   popMatrix();
+
+
+
+
+    // CIENCIAS NATURALES Y EXACTAS
+  
+    fill (cyan);
+    noStroke();
+
+    ellipse (2*(width/10), 520, 80, 80);
+    fill(gray);
+    println(doc.getInt(0, 4));
+    textFont (subs, 24);
+    textAlign(CENTER);
+    text(doc.getString(0, 1), (2*(width/10))-80, 520-10);//título de categoria
+    fill(255);
+    textFont (numbers, 25);
+    text (doc.getString(0, 6), 2*(width/10), 520+25);//valor total
+
+
+
+    noFill();
+    stroke (cyan);
+    strokeWeight(4);
+    arc((2*(width/10))-20,520-10, 150+(fila*40), 150+(fila*40), 0, radbio);
+    textAlign(LEFT);
+
+    
+pushMatrix();
+translate (-22,272);
+
+    // Esto es para hacer el mousePresesed 80,520
+    if (mouseY>400 && mouseY<580) {  
+      if (mouseX>200 && mouseX<340) {
+          fill (cyan,50);
+    noStroke();
+    ellipseMode(CENTER);
+        ellipse (2*(width/10)+20, 245, 130, 130);
+        
+        noStroke();
+        fill(moscuro);
+        textFont (numbers, 14);
+        ellipse (211, 350, 25, 25);
+        fill(255);
+        text(doc.getString(0, 2), 203, 355);
+
+        fill(moscuro);
+
+        ellipse (159, 336, 25, 25);
+        fill(255);
+        text(doc.getString(0, 3), 150, 342);
+
+        fill(moscuro);
+        ellipse (171, 375, 25, 25);
+        fill(255);
+        text(doc.getString(0, 4), 163, 381);
+
+
+        fill(moscuro);
+        ellipse (404, 315, 25, 25);
+        fill(255);
+        text(doc.getString(0, 5), 398, 320);
+      }
+    }
+popMatrix();
+ textFont (numbers, 14);
+    fill(gray);
+    pushMatrix();
+    translate(2*(width/10), 520-20);
+     rotate(-PI/2);
+    textFont (numbers, 14);
+    fill(gray);
+     text("2010", 0,100);
+    text("2011", 0,120);
+    text("2012", 0,140);
+    text("2013", 0,160);
+    popMatrix();
+
+
+
+
+//CIENCIAS MÉDICAS Y DE LA SALUD
+   
+
+
+    fill (teal);
+    noStroke();
+    ellipse (970, 530, 40, 40);
+    fill(gray);
+    println(doc.getInt(0, 4));
+    textAlign(CENTER);
+    textFont (subs, 24);
+    text(doc.getString(2, 1), 950-60, 520-10);//título de categoria
+    fill(255);
+    text (doc.getString(2, 6),970,520+18);//valor total
+
+    noFill();
+    textFont (numbers, 14);
+    stroke (teal);
+    strokeWeight(4);
+    arc(970-20, 520-10, 150+(fila*40), 150+(fila*40), 0, radbio);
+    textAlign(LEFT);
+
+
+//970, 520
+pushMatrix();
+translate(710,270);
+    if (mouseY>460 && mouseY<580) {  
+      if (mouseX>910 && mouseX<1030) {
+       
+           fill (teal,50);
+    noStroke();
+    ellipseMode(CENTER);
+        ellipse (2*(width/10)+20, 245, 130, 130);
+        
+        
+        
+        noStroke();
+        fill(cyan);
+        ellipse (212, 350, 25, 25);
+        fill(255);
+        text(doc.getString(2, 2), 207, 355);
+
+        fill(cyan);
+        ellipse (150, 345, 25, 25);
+        fill(255);
+        text(doc.getString(2, 3), 145, 350);
+
+        fill(cyan);
+        ellipse (169, 381, 25, 25);
+        fill(255);
+        text(doc.getString(2, 4), 164, 386);
+
+
+        fill(cyan);
+        ellipse (400, 316, 25, 25);
+        fill(255);
+        text(doc.getString(2, 5), 395, 320);
+      }
+    }   
+popMatrix();
+
+     pushMatrix();
+    translate(970, 520-20);
+     rotate(-PI/2);
+    textFont (numbers, 14);
+    fill(gray);
+      text("2010", 0,100);
+    text("2011", 0,120);
+    text("2012", 0,140);
+    text("2013", 0,160);
+    popMatrix();
+
+   
+
+
+//CIENCIAS AGRÍCOLAS
+
+    fill (moscuro);
+    noStroke();
+    ellipse (900+mas, 266, 35, 35);
+    fill(gray);
+    textFont(subs, 24);
+    println(doc.getInt(3, 4));
+    textAlign(CENTER);
+    text(doc.getString(3, 1), 900+(mas)-60,250-10);//título de categoria
+    fill (255);
+    textFont(subs, 24);
+    text (doc.getString(3, 6), 900+mas,250+25);//valor total
+
+
+    noFill();
+    stroke (moscuro);
+    strokeWeight(4);
+    arc(900+(mas)-20, 250-10, 150+(fila*40), 150+(fila*40), 0, radagri);
+    textAlign(LEFT);
+
+
+     pushMatrix();
+    translate(900+(mas), 250-20);
+     rotate(-PI/2);
+    textFont (numbers, 14);
+    fill(gray);
+   text("2010", 0,100);
+    text("2011", 0,120);
+    text("2012", 0,140);
+    text("2013", 0,160);
+    popMatrix();
+
+//900,250
+pushMatrix();
+translate(640+mas,0);
+    if (mouseY>170 && mouseY<310) {  
+      if (mouseX>800 && mouseX<960) {
+       
+    fill (moscuro,50);
+    noStroke();
+    ellipseMode(CENTER);
+        ellipse (2*(width/10)+20, 255, 130, 130);
+        
+        
+        noStroke();
+        fill(morado);
+        ellipse (205, 348, 25, 25);
+        fill(255);
+        textFont(numbers, 13);
+        text(doc.getString(3, 2), 201, 351);
+
+
+        fill(morado);
+        ellipse (189, 368, 25, 25);
+        fill(255);
+        textFont(numbers, 13);
+        text(doc.getString(3, 3), 185, 372);
+
+
+        fill(morado);
+        ellipse (140, 350, 25, 25);
+        fill(255);
+        text(doc.getString(3, 4), 135, 355);
+
+
+        fill(morado);
+        ellipse (400, 315, 25, 25);
+        fill(255);
+        text(doc.getString(3, 5), 398, 320);
+
+
+
+
+   
+      }
+    } 
+  popMatrix();
+
+
+
+//CIENCIAS SOCIALES
+
+  
+  fill (0);
+  noStroke();
+  ellipse (230,250, 120, 120);
+  fill(gray);
+  println(doc.getInt(4, 4));
+  textAlign(CENTER);
+  textFont(subs, 25);
+  text(doc.getString(4, 1), 230-60,250-10);//título de categoria
+  fill(255);
+  text (doc.getString(4, 6), 230,250+25);//valor total
+
+  noFill();
+  stroke (0);
+  strokeWeight(4);
+  arc(250-40, 250-10, 150+(fila*40), 150+(fila*40), 0, radsoc);
+  textAlign(LEFT);
+
+//270,250
+   if (mouseY>170 && mouseY<360) {  
+      if (mouseX>200 && mouseX<340) {
+           fill (gray,50);
+    noStroke();
+    ellipseMode(CENTER);
+        ellipse (2*(width/10)-10, 251, 135, 135);
+        
+        
+        
+        
+  noStroke();
+  fill(gray);
+  ellipse (188, 352, 25, 25);
+  fill(255);
+  textFont(numbers, 13);
+  text(doc.getString(4, 2), 180, 357);
+
+
+  fill(gray);
+  ellipse (167, 368, 25, 25);
+  fill(255);
+  text(doc.getString(4, 3), 160, 373);
+
+
+  fill(gray);
+  ellipse (97, 338, 25, 25);
+  fill(255);
+  text(doc.getString(4, 4), 89, 344);
+
+
+  fill(gray);
+  ellipse (365, 326, 25, 25);
+  fill(255);
+  text(doc.getString(4, 5), 361, 330);
+
+      }
+   }
+
+
+     pushMatrix();
+    translate(230, 250-20);
+     rotate(-PI/2);
+    textFont (numbers, 14);
+    fill(gray);
+   text("2010", 0,100);
+    text("2011", 0,120);
+    text("2012", 0,140);
+    text("2013", 0,160);
+    popMatrix();
+
+
+
+
+  
+//HUMANIDADES
+
+   fill (grayos);
+   noStroke();
+   ellipse (width/2,160-mas,45,45);
+   fill(gray);
+   println(doc.getInt(5,4));
+   textAlign(CENTER);
+   textFont(subs,25);
+   text(doc.getString(5,1),(width/2)-60,150-(10+mas));//título de categoria
+   fill(255);
+   text (doc.getString(5,6),(width/2),150+(25-mas));//valor total
+   
+   
+   noFill();
+   
+   stroke (grayos);
+   strokeWeight(4);
+   arc((width/2)-20,150-(10+mas),150+(fila*40),150+(fila*40),0,radhum);
+   textAlign(LEFT);
+   
+   pushMatrix();
+   translate(340,-100-mas);
+   //600,150
+     if (mouseY>70 && mouseY<240) {  
+      if (mouseX>500 && mouseX<680) {
+        
+           fill (grayos,50);
+    noStroke();
+    ellipseMode(CENTER);
+        ellipse (2*(width/10)+20, 260, 120, 120);
+        
+        
+        
+   noStroke();
+   fill(gray);
+   ellipse (236,351,25,25);
+   fill(0);
+   textFont(numbers,14);
+   text(doc.getString(5,2),231,356);
+   
+   fill(gray);
+   ellipse (158,338,25,25);
+   fill(0);
+   text(doc.getString(5,3),153,343);
+   
+   fill(gray);
+   ellipse (140,357,25,25);
+   fill(0);
+   text(doc.getString(5,4),135,362);
+   
+   
+   fill(gray);
+   ellipse (402,315,25,25);
+   fill(0);
+   text(doc.getString(5,5),398,319);
+   
+      }
+     }
+     popMatrix();
+   
+   pushMatrix();
+    translate((width/2)+10,150-(20+mas));
+     rotate(-PI/2);
+    textFont (numbers, 14);
+    fill(gray);
+    text("2010", 0,90);
+    text("2011", 0,110);
+    text("2012", 0,128);
+    text("2013", 0,150);
+    popMatrix();
+
+  
+ 
+  //Título
+
+//fill(0);
+noStroke();
+fill(grayos,10);
+//stroke(grayos,20);
+rectMode(CENTER);
+   ellipse((width/2),(height/2)+30,200,200);
+      //ellipse((width/2),(height/2)+20,285,100);
+  
+  noStroke();
+  fill(0,40);
+  textFont (tit, 40);
+  textAlign(CENTER);
+  text ("Doctores según área OCDE", 600, 380);
+  text ( "y año de graduación", 600, 420);
+  fill (gray);
+
+
+  //total
+  textAlign(LEFT);
+  //fill(255);
+  //ellipse (width/2, (height/2), 100, 100);
+ //fill(255);
+  //textFont (subs, 18);
+  //text ("Doctores", (width/2)-30, (height/2)); 
+  //text ("por año", (width/2)-20, (height/2)+20);
+  
+  fill (255);
+  ellipse ((width/2)+100, (height/2)+80, 50, 50);
+  fill(grayos);
+  textFont (subs, 12);
+  text ("año 2013", (width/2)+83, (height/2)+80);
+  fill(0);
+  textFont (subs, 12);
+  text ("179", (width/2)+95, (height/2)+95);
+
+
+  fill (255);
+  ellipse ((width/2)+40, (height/2)+80, 50, 50); 
+  fill(grayos);
+  textFont (subs, 12);
+  text ("año 2012", (width/2)+24, (height/2)+80);
+  fill(0);
+  textFont (subs, 12);
+  text ("967",(width/2)+34, (height/2)+95);
+
+
+  fill (255);
+  ellipse ((width/2)-30, (height/2)+80, 50, 50);
+ fill(grayos);
+  textFont (subs, 12);
+  text ("año 2011", (width/2)-47, (height/2)+80);
+  fill(0);
+  textFont (subs, 12);
+  text ("885", (width/2)-37, (height/2)+95);
+
+
+
+  fill (255);
+  ellipse ((width/2)-100, (height/2)+80, 50, 50);
+fill(grayos);
+  textFont (subs, 12);
+  text ("año 2010", (width/2)-117, (height/2)+80);
+  fill(0);
+  textFont (subs, 12);
+  text ("778", (width/2)-107, (height/2)+94);
+
+}
+}
