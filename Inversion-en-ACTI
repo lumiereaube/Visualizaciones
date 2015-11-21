@@ -1,0 +1,308 @@
+Table finan; 
+Table aha;
+PFont tit;
+PFont numbers;
+PFont subs; 
+PFont total;
+PFont baja;
+//Colores 
+color vclaro= color(193,238,95);
+color lima = color(157,215,42);
+color arbol = color (100,174,17);
+color opaco= color (77,118,78);
+color marino = color (16,133,98);
+color marclaro = color (57,152,123);
+color cafe = color (163,143,132);
+color grisos= color(117,112,102);
+color gris = color (207,213,216);
+
+
+
+//variable for images
+int posXim= 120;
+int poxYim= 390;
+int tam = 25;
+
+
+
+
+
+// variable for boxes
+int rot=200;
+int rotZ=220;
+int espaciado=400;
+int posY= 350;
+int posZ= -80;
+int posx= 100;
+
+
+
+//variables for size of boxes
+int creci=3;
+int ancho=50;
+int entre=700;
+
+void setup () {
+  size (1200, 600, P3D);
+  
+aha= loadTable ("wd.csv","header");
+  finan = loadTable ("owow.csv", "header"); 
+ numbers= loadFont ("BebasNeue-Thin-48.vlw");
+  tit= loadFont ("BebasNeueBold-48.vlw");
+  subs = loadFont ("BebasNeueBook-25.vlw");
+  total= loadFont ("BebasNeueLight-20.vlw");
+  baja = loadFont ("AvenirNext-Bold-13.vlw");
+         smooth(2);
+
+}
+void draw () {
+  background (239,226,196);
+
+  //fill (200);
+  // rect(650, 100, 300, 425);
+
+
+
+println(aha.getRowCount () + "total rows in table");
+println(aha.getColumnCount() + "total columns in table");
+
+  for ( int fila= 2; fila < 5; fila ++) {
+  for (int filaha=0;filaha<5; filaha++){
+  
+   //EMPRESAS
+    pushMatrix ();
+    translate (posx+(fila*espaciado)-entre,posY, posZ+60-(finan.getFloat(0, fila)*creci)/2);
+    rotateX(PI/6);
+    //rotateY(mouseY/8);
+    stroke(255);
+    fill(vclaro);
+    box (ancho,ancho, 50+(finan.getFloat(0,fila)*creci));
+     fill(grisos);
+   textFont(numbers,20);
+   text(aha.getString(0,fila),0,10,80);
+   
+    popMatrix ();
+
+
+//INSTITUCIONES DE EDUCACIÓN SUPERIOR
+
+  pushMatrix ();
+    translate (posx+(fila*espaciado)-(entre+70),posY, posZ+60-(finan.getFloat(1, fila)*creci)/2);
+    rotateX(PI/6);
+    //rotateY(mouseY/8);
+    stroke(255);
+    fill(lima);
+    box (ancho,ancho, 50+(finan.getFloat(1,fila)*creci));
+     fill(grisos);
+   textFont(numbers,20);
+   text(aha.getString(1,fila),0,10,70);
+   
+    popMatrix ();
+
+    
+
+//ENTIDADES GOBIERNO CENTRAL
+  pushMatrix ();
+    translate (posx+(fila*espaciado)-(entre-70),posY, posZ+60-(finan.getFloat(2, fila)*creci)/2);
+    rotateX(PI/6);
+    //rotateY(mouseY/8);
+    stroke(gris);
+    fill(opaco);
+    box (ancho,ancho, 50+(finan.getFloat(2,fila)*creci));
+    fill(gris);
+noStroke();
+   textFont(numbers,20);
+   text(aha.getString(2,fila),0,10,64);
+    popMatrix ();
+    
+    
+    
+    
+    
+    //Centros de investigacion y desarrollo tecnologico
+    pushMatrix ();
+    translate (posx+(fila*espaciado)-(entre-70),posY-70, -80+(finan.getFloat(3, fila)*creci)/2);
+    rotateX(PI/6);
+    //rotateY(mouseY/8);
+    stroke(255);
+    fill(marino);
+    box (ancho,ancho, 50+(finan.getFloat(3,fila)*creci));
+        fill(gris);
+        noStroke();
+   textFont(numbers,20);
+   text(aha.getString(3,fila),0,10,50);
+
+    
+    popMatrix ();
+  
+  
+  
+//Hospitales y clinicas
+
+    pushMatrix ();
+    translate (posx+(fila*espaciado)-(entre+70),posY-70, -80+(finan.getFloat(4, fila)*creci)/2);
+    rotateX(PI/6);
+    //rotateY(mouseY/8);
+    stroke(gris);
+    fill(marclaro);
+    box (ancho,ancho, 50+(finan.getFloat(4,fila)*creci));
+    fill(gris);
+    noStroke();
+   textFont(numbers,20);
+   text(aha.getString(4,fila),0,10,30);
+
+    popMatrix ();
+    
+    
+    //IPSFL al servicio de empresa
+      pushMatrix ();
+    translate (posx+(fila*espaciado)-(entre),posY-70, -80+(finan.getFloat(5, fila)*creci)/2);
+    rotateX(PI/6);
+    //rotateY(mouseY/8);
+    stroke(gris);
+    fill(arbol);
+    box (ancho,ancho, 50+(finan.getFloat(5,fila)*creci));
+   noStroke();
+   fill(gris);
+   textFont(numbers,20);
+   text(aha.getString(5,fila),0,10,35);
+    popMatrix ();
+    
+    
+    //ONG y agremiaciones
+        pushMatrix ();
+    translate (posx+(fila*espaciado)-(entre-70),posY-140, -80+(finan.getFloat(6, fila)*creci)/2);
+    rotateX(PI/6);
+    //rotateY(mouseY/8);
+    stroke(gris);
+    fill(cafe);
+    box (ancho,ancho, 50+(finan.getFloat(6,fila)*creci));
+    noStroke();
+    fill(gris);
+        fill(0);
+textFont(numbers,20);
+   text(aha.getString(6,fila),0,10,30);
+   
+    
+    popMatrix ();
+
+pushMatrix();
+translate (100,100,-300);
+
+rotateX(PI/6);
+rectMode(CENTER);
+fill(gris);
+rect(70,200,265,340);
+
+rectMode(CENTER);
+rect(510,200,270,340);
+
+
+rectMode(CENTER);
+rect(950,200,280,340);
+popMatrix();
+
+     
+    
+
+
+} 
+ 
+
+  }
+ //TEXTOS años
+      //fill(0);  
+    // box (ancho+70,ancho, 10);
+  
+     
+       fill(grisos);
+     textFont(tit,38);
+     text ("2012",290,240,100);
+      text ("2013",570,240,100);
+       text ("2014",840,240,100);
+       
+       
+noStroke();
+  fill(0,0,0,80);
+  textFont (tit, 48);
+  textAlign(CENTER);
+  text ("Inversión nacional en ACTI por tipo de entidad ejecutora, 2012 - 2014", 600, 100);
+  //text ( "y año de graduación", 600, 420);
+  
+          fill(grisos);
+         textFont(total,20);
+              text ("Total (2012)",310,410,100);
+               text ("3'174,888,000,000",310,430,100);
+               
+               fill(grisos);
+         textFont(total,20);
+              text ("Total (2013)",610,410,100);
+               text ("3'729,492,000,000",610,430,100);
+               
+                       fill(grisos);
+         textFont(total,20);
+              text ("Total (2014)",910,410,100);
+               text ("3'391,425,000,000",910,430,100);
+ 
+  pushMatrix();
+  translate (100,-30,0);
+  textFont (baja,11);
+  rectMode (CENTER);  
+  fill(vclaro);
+  rect (0,547,30,30);
+  fill (grisos);
+  textMode(LEFT);
+  text ("Empresas",138,510,100);
+  
+  
+  
+   rectMode (CENTER); 
+     fill(lima);
+  rect (117,547,30,30);
+  fill (grisos);
+  textMode(LEFT);
+  text ("Instituciones de educación superior",305,510,100);
+  
+  
+  
+   rectMode (CENTER);  
+   fill (opaco);
+  rect (405,547,30,30);
+  fill (grisos);
+  text ("Entidades del gobierno central",525,510,100);
+  
+  
+  
+   rectMode (CENTER);  
+    fill (marino);
+  rect (680,547,30,30);
+  fill (grisos);
+  text ("Centros de investigación y desarrollo tecnológico",796,510,100);
+  
+  
+  
+  
+  
+ rectMode (CENTER);
+  fill (marclaro);
+  rect(100,590,30,30);
+  fill (grisos);
+  text ("Hospitales y clínicas",247,545,100);
+  
+  
+  
+  
+  rectMode (CENTER);
+   fill (arbol);
+  rect(300,590,30,30);
+  fill (grisos);
+  text ("IPSFL al servicio de empresas",435,545,100);
+  
+  
+  
+    rectMode (CENTER);
+      fill (grisos);
+  rect(550,590,30,30);
+  text ("ONG,asociaciones y agremiaciones profesionales",690,545,100);
+  popMatrix();
+  }
